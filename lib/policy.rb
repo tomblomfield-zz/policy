@@ -1,3 +1,3 @@
-module Policy
-
-end
+require 'policy/policy_object'
+require 'policy/policy_behaviour'
+require 'policy/context'

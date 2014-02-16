@@ -1,6 +1,7 @@
 # Policy
 
-Simple Ruby Gem that implements Policy Objects in Rails
+Simple Ruby Gem that implements Policies in Ruby - an object-oriented
+approach to controller permissioning.
 
 ## Usage
 
@@ -66,8 +67,6 @@ class CheckoutController
   policy :has_credit_card, user: current_user, only: [:new, :create]
 
   ...
-
-
 
   private
 
