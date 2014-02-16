@@ -50,6 +50,10 @@ end
 Your Policy object will have the controller context available within its
 `perform` method - ie you can access methods like `current_member`
 
+If the Policy is failed, the `unauthorized` will be called on the controller -
+by default this will `redirect_to :back` and set a flash error, but this can
+be customised
+
 ### Advanced Options
 
 #### Target certain controller actions
@@ -65,7 +69,7 @@ class CheckoutController
 end
 ```
 
-#### Custom Error Methods
+#### Custom Unauthorized Methods
 
 By default, on failure Policy will respond to an HTML format request with
 `redirect_to :back` and set a flash error.
