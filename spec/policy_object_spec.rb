@@ -27,7 +27,7 @@ describe Policy::PolicyObject do
     it { should be_allowed } # by default
 
     context "when disallowed" do
-      before { policy_object.context.instance_variable_set(:@allowed, false) }
+      before { policy_object.instance_variable_set(:@allowed, false) }
 
       it { should_not be_allowed }
     end

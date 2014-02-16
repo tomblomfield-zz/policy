@@ -8,16 +8,25 @@ module Policy
     end
 
     module ClassMethods
-      def policy(policy_sym, args = {})
+      def policy(policy_sym, args = {}, &block)
         before_filter ->(controller) do
-          policy_object = policy_class(policy_sym).perform(args)
+          if block_given?
+            policy_object = policy_class(policy_sym).perform(controller.instance_eval(&block))
+          else
+            policy_object = policy_class(policy_sym).perform(controller)
+          end
+
           controller.unauthorized(policy_object.message) unless policy_object.allowed?
-        end, args.select { |k,_| [:only, :except].include?(k) }
+        end, args
       end
 
       def policy_class(policy_sym)
         (policy_sym.to_s.camelize + "Policy").constantize
       end
+    end
+
+    def policy_class(sym)
+      self.class.policy_class(sym)
     end
 
     def unauthorized(message)
