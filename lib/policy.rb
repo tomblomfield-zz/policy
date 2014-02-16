@@ -1,0 +1,3 @@
+module Policy
+
+end

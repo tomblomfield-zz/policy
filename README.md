@@ -17,7 +17,7 @@ class HasCreditCard
   include Policy::PolicyObject
 
   def perform
-    fail!("Credit card requires") if user.credit_card.nil?
+    fail!("Credit card required") if user.credit_card.nil?
   end
 end
 ```
@@ -39,11 +39,10 @@ end
 #### Target certain controller actions
 
 
-
 ```ruby
 class CheckoutController
 
-  policy :has_credit_card, user: current_user
+  policy :has_credit_card, user: current_user, only: [:new, :create]
 
   ...
 
@@ -57,6 +56,26 @@ It will respond to json with
 
 ```ruby
 { status: :unauthorized, errors: ["Your error message"] }
+```
+
+You can override the `unauthorized` method to respond however you like:
+
+```ruby
+class CheckoutController
+
+  policy :has_credit_card, user: current_user, only: [:new, :create]
+
+  ...
+
+
+
+  private
+
+  def unauthorized(message)
+    redirect_to :home_path, notice: message
+  end
+
+end
 ```
 
 #### Use Policy Outside a Controller
