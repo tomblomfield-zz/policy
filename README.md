@@ -100,7 +100,7 @@ If you want to explicitly provide arguments to your Policy objects, pass them
 in a hash wrapped inside a method block
 
 ```ruby
-  policy(:called_jack, only: [:jobs]) {{ member: current_member }}
+  policy(:has_credit_card) {{ member: current_member }}
 ```
 
 #### Use Policy Outside a Controller
