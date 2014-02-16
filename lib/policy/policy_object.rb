@@ -22,6 +22,10 @@ module Policy::PolicyObject
     context.fail!(*args)
   end
 
+  def message
+    context.key?(:message) ? super : "Unauthorized"
+  end
+
   def context
     @context
   end

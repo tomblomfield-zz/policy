@@ -44,5 +44,10 @@ describe Policy::PolicyObject do
       policy_object.fail!(message: msg)
       policy_object.message.should == msg
     end
+
+    it "exposes an optional error message even when not defined" do
+      policy_object.fail!
+      policy_object.message.should == "Unauthorized"
+    end
   end
 end

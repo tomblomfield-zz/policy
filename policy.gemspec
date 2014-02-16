@@ -2,6 +2,7 @@ require File.expand_path('../lib/policy/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.add_development_dependency 'rspec'
+  gem.add_runtime_dependency 'activesupport'
 
   gem.authors = ['Tom Blomfield']
   gem.description = %q{Simple implementation of Policy Objects in Ruby}

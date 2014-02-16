@@ -11,10 +11,22 @@ approach to controller permissioning.
 gem install policy
 ````
 
-### Define a Policy
+If you want to use the library with Rails:
 
 ```ruby
-class HasCreditCard
+
+class ApplicationController < ActionController::Base
+  include Policy::PolicyBehaviour
+end
+```
+
+### Define a Policy
+
+Policy is focused around policy classes. By default, you should put these
+classes in app/policies and they should end with `Policy`
+
+```ruby
+class HasCreditCardPolicy
   include Policy::PolicyObject
 
   def perform
