@@ -91,7 +91,7 @@ class CheckoutController
   private
 
   def unauthorized(message)
-    redirect_to :home_path, notice: message
+    redirect_to home_path, notice: message
   end
 
 end
@@ -104,19 +104,26 @@ If you want to explicitly provide arguments to your Policy objects, pass them
 in a hash wrapped inside a method block
 
 ```ruby
+class CheckoutController
+
   policy(:has_credit_card) {{ member: current_member }}
+
+  ...
+
+end
 ```
 
 #### Use Policy Outside a Controller
 
-You can initialize a policy object by calling `perform`
+You can initialize a policy object anywhere in your application by calling
+`perform`
 
 ```ruby
 can_edit = CanEditPolicy.perform(user: current_user)
 link_to "Edit Me", edit_path if can_edit.allowed?
 ```
 
-Or pass in the context if you're feeling lazy
+Or just pass in the context if you're feeling lazy
 
 ```ruby
 can_edit = CanEditPolicy.perform(self)
