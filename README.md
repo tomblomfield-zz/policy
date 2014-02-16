@@ -23,7 +23,7 @@ end
 ### Define a Policy
 
 Policy is focused around policy classes. By default, you should put these
-classes in app/policies and they should end with `Policy`
+classes in `app/policies` and they should end with `Policy`
 
 ```ruby
 class HasCreditCardPolicy
@@ -47,7 +47,8 @@ class CheckoutController
 end
 ```
 
-Your Policy object will have the controller context available within its perform method
+Your Policy object will have the controller context available within its
+`perform` method - ie you can access methods like `current_member`
 
 ### Advanced Options
 
@@ -66,9 +67,10 @@ end
 
 #### Custom Error Methods
 
-By default, on failure Policy will respond to an HTML format request with redirect :back and set a flash notice.
-It will respond to json with
+By default, on failure Policy will respond to an HTML format request with
+`redirect_to :back` and set a flash error.
 
+It will also respond to json with:
 ```ruby
 { status: :unauthorized, errors: ["Your error message"] }
 ```
