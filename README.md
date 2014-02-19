@@ -1,7 +1,7 @@
 # Policy
 
-Simple Ruby Gem that implements Policies in Ruby - an object-oriented
-approach to controller permissioning.
+Simple implementation of Policies in Ruby - an object-oriented approach to
+controller permissioning.
 
 ## Usage
 
@@ -22,7 +22,7 @@ end
 
 ### Define a Policy
 
-Policy is focused around policy classes. By default, you should put these
+Policy is focused around Policy Objects. By default, you should put these
 classes in `app/policies` and they should end with `Policy`
 
 ```ruby
