@@ -40,15 +40,12 @@ end
 ```ruby
 class CheckoutController
 
-  policy :has_credit_card
+  policy(:has_credit_card) {{ member: current_member }}
 
   ...
 
 end
 ```
-
-Your Policy object will have the controller context available within its
-`perform` method - ie you can access methods like `current_member`
 
 If the Policy is failed, the `unauthorized` will be called on the controller -
 by default this will `redirect_to :back` and set a flash error, but this can
@@ -62,7 +59,7 @@ be customised
 ```ruby
 class CheckoutController
 
-  policy :has_credit_card, only: [:new, :create]
+  policy(:has_credit_card, only: [:new, :create]) {{ member: current_member }}
 
   ...
 
@@ -98,21 +95,6 @@ end
 ```
 
 
-#### Explicit arguments
-
-If you want to explicitly provide arguments to your Policy objects, pass them
-in a hash wrapped inside a method block
-
-```ruby
-class CheckoutController
-
-  policy(:has_credit_card) {{ member: current_member }}
-
-  ...
-
-end
-```
-
 #### Use Policy Outside a Controller
 
 You can initialize a policy object anywhere in your application by calling
@@ -120,13 +102,6 @@ You can initialize a policy object anywhere in your application by calling
 
 ```ruby
 can_edit = CanEditPolicy.perform(user: current_user)
-link_to "Edit Me", edit_path if can_edit.allowed?
-```
-
-Or just pass in the context if you're feeling lazy
-
-```ruby
-can_edit = CanEditPolicy.perform(self)
 link_to "Edit Me", edit_path if can_edit.allowed?
 ```
 

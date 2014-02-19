@@ -7,7 +7,6 @@ module Policy
 
     module ClassMethods
       def perform(args = {})
-        puts "initialized with #{args.inspect}"
         new(args).tap(&:perform)
       end
     end

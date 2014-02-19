@@ -19,24 +19,7 @@ describe Policy::PolicyBehaviour do
   context "with an explicit block" do
     it "calls the method on the controller" do
       controller.should_receive(:current_user)
-      controller_class.policy(:can_test) { { user: current_user } }
-    end
-  end
-
-
-  context "with implicit controller context" do
-    before do
-      class CanTestPolicy
-        include Policy::PolicyObject
-        def perform
-          current_user.nil?
-        end
-      end
-    end
-
-    it "calls the method on the controller" do
-      controller.should_receive(:current_user)
-      controller_class.policy(:can_test)
+      controller_class.policy(:can_test) {{ user: current_user }}
     end
   end
 

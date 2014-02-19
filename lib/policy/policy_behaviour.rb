@@ -10,12 +10,8 @@ module Policy
     module ClassMethods
       def policy(policy_sym, args = {}, &block)
         before_filter ->(controller) do
-          if block_given?
-            policy_object = policy_class(policy_sym).perform(controller.instance_eval(&block))
-          else
-            policy_object = policy_class(policy_sym).perform(controller)
-          end
-
+          policy_args = block_given? ?  controller.instance_eval(&block) : {}
+          policy_object = policy_class(policy_sym).perform(policy_args)
           controller.unauthorized(policy_object.message) unless policy_object.allowed?
         end, args
       end
